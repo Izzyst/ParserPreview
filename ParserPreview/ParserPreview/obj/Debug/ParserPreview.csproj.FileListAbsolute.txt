@@ -1,0 +1,11 @@
+c:\users\izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\ParserPreview.exe.config
+c:\users\izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\ParserPreview.exe
+c:\users\izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\ParserPreview.pdb
+c:\users\izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\obj\Debug\ParserPreview.csprojResolveAssemblyReference.cache
+c:\users\izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\obj\Debug\ParserPreview.exe
+c:\users\izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\obj\Debug\ParserPreview.pdb
+C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.xml
