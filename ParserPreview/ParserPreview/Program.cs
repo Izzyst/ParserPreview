@@ -10,7 +10,10 @@ namespace ParserPreview
     {
         static void Main(string[] args)
         {
-            LoadPage l = new LoadPage();
+            // FromWebpageFactory fac = new FromWebpageFactory();
+            // fac.getLetters();
+            LoadPage collins = new LoadPage();
+            
             Console.ReadKey();
         }
     }

@@ -23,55 +23,87 @@ using HtmlAgilityPack;
 
 namespace ParserPreview
 {
+
     class LoadPage
     {
-
-       // string downloadString = new WebClient().DownloadString("https://www.collinsdictionary.com/dictionary/english/picturesque");
+        private List<Words> words = new List<Words>();
+  
         public LoadPage()
         {
+            // pobranie listy zawierającej wyprodukowane adresy stron ze słowami // FromWebpageFactory
+            List<string> links = new List<string>();
+            FromWebpageFactory urlList = new FromWebpageFactory();
+            links = urlList.getLetters();
+
             dynamic ob = new ExpandoObject();
             ob.name = "Colins";
-            ob.website = "https://www.collinsdictionary.com/dictionary/english/picturesque";
+            //ob.website = "https://www.collinsdictionary.com/dictionary/english/picturesque";
             ob.language = "en-US";
+            string html = "https://www.collinsdictionary.com/dictionary/english/picturesque";
+            //ob.defs = gettingNodesfromURL(html);
+            foreach(var item in links)
+            {
+                Console.WriteLine(item);
+                //words.Add(gettingNodesfromURL(item));
+            }
 
-            ob.defs = gettingNodesfromURL();
-  
-            string json = JsonConvert.SerializeObject(ob);
-            Console.WriteLine(json);
-           // Console.WriteLine(gettingNodesfromURL());
+            // string json = JsonConvert.SerializeObject(ob);
+            // Console.WriteLine(json);
+            // Console.WriteLine(gettingNodesfromURL());
+            // gettingNodesfromURL(html);
+            /*using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\WriteLines1.txt"))
+            {
+                words.ForEach(i => file.WriteLine("{0}, {1}\t",i.word, i.defs[0]));
+            }*/
+            words.ForEach(i => Console.WriteLine("{0}, {1}\t", i.word, i.defs[0]));
+        }
+
+
+        public Words gettingNodesfromURL(string html)
+        {
+            
+            List<string> definitions = new List<string>();
+            var webGet = new HtmlWeb();
+            var doc = webGet.Load(html);
+            // word:
+            try
+            {
+                Words w;
+                HtmlNode node = doc.DocumentNode.SelectSingleNode("//span[@class='orth']");
+                // definitions for word
+                HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//div[@class='def']");
+                if(nodes != null)
+                {
+                    foreach (HtmlNode link in nodes)
+                    {
+                        definitions.Add(Strip(link.InnerText));
+                    }
+                     w = new Words(node.InnerText, definitions);
+                    
+                }
+                else
+                {
+                    throw new Exception("No matching nodes found!");
+                }
+                return w;
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
             
         }
 
-      /*  public void getSynonyms()
+
+        //usuwanie tagów html
+        public static string Strip(string text)
         {
-            Regex ItemRegex = new Regex(@"class=.content definitions*.*div class=.div copyright.", RegexOptions.Compiled);
-            foreach (Match ItemMatch in ItemRegex.Matches(downloadString))
-            {
-                //Console.WriteLine(ItemMatch);
-                //saveToXml(ItemMatch, "def" + count);
-                Console.WriteLine(" " + ItemMatch);
-            }
-        }*/
-
-        public HtmlNodeCollection gettingNodesfromURL()
-        {
-  
-                    var webGet = new HtmlWeb();
-                    var doc = webGet.Load("https://www.collinsdictionary.com/dictionary/english/picturesque");
-                   // HtmlNode node = doc.DocumentNode.SelectSingleNode("//div[@id='picturesque__1']");
-
-                    HtmlNodeCollection Nodes = doc.DocumentNode.SelectNodes("//a[@class='def']");
-                    foreach (var link in Nodes)
-                    {
-                        Console.WriteLine(link.Attributes.ToString()); 
-                    }
-
-            /*else
-            {
-               // return 0;
-            }*/
-
-            return Nodes;
+            //usuwanie komentarzy 
+            text = Regex.Replace(text, @"(<![^<]*>)", string.Empty);
+            //usuwanie skryptów oraz arkuszy styli
+            text = Regex.Replace(text, @"(<script[^<]*</script>)|(<style[^<]*</style>)|(&[^;]*;)", string.Empty);
+            text = Regex.Replace(text, @"<(.|\n)*?>", string.Empty);
+            return text;
         }
 
     }

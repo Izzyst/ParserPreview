@@ -9,3 +9,14 @@ C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPrevi
 C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.dll
 C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\Izabela\documents\visual studio 2017\Projects\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\ParserPreview.exe.config
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\ParserPreview.exe
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\ParserPreview.pdb
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\obj\Debug\ParserPreview.csprojResolveAssemblyReference.cache
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\obj\Debug\ParserPreview.exe
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\obj\Debug\ParserPreview.pdb
