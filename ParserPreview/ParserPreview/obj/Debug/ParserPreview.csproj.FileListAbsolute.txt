@@ -20,3 +20,9 @@ C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\
 C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\obj\Debug\ParserPreview.csprojResolveAssemblyReference.cache
 C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\obj\Debug\ParserPreview.exe
 C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\obj\Debug\ParserPreview.pdb
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\Arebis.Office.dll
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\EPPlus.dll
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\Arebis.Office.xml
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\EPPlus.xml
+C:\Users\Izabela\Documents\GitHub\ParserPreview\ParserPreview\ParserPreview\bin\Debug\ICSharpCode.SharpZipLib.dll

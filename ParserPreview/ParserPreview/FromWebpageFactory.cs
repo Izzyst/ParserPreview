@@ -10,7 +10,7 @@ using System.Web;
 // sprawdzic czy zapisalo odpowiednie linki
 namespace ParserPreview
 {
-    class FromWebpageFactory :  DictionaryFactory
+    class FromWebpageFactory
     {
 
         private List<string> words = new List<string>();
@@ -30,13 +30,13 @@ namespace ParserPreview
                 foreach (HtmlNode item in nodes)
                 {
                     html = "https://www.collinsdictionary.com" + item.Attributes["href"].Value;// letterz A-Z
-                    subwords = getWords(html, 10);// zwraca liste słów zawierającą się w danym przedziale literowym np. ab..., abg...., ath...
+                    subwords = getWords(html, 5);// zwraca liste słów zawierającą się w danym przedziale literowym np. ab..., abg...., ath...
                     List<string> w = new List<string>();
                     if(count!=0)// ponieważ słowa w przedziale # nie posiadają podprzedzialów, dlatego je omijam
                     {
                         for (int i = 0; i < subwords.Count; i++)
                         {
-                             w=getWords(subwords[i], 2);
+                             w=getWords(subwords[i], 1);
                              words.AddRange(w);// AddRange - dopisuje liste do listy
                         }
                     }
@@ -71,7 +71,7 @@ namespace ParserPreview
                     {
                         int j = rnd.Next(0, nodes.Count);
                         html2 = "https://www.collinsdictionary.com" + nodes[j].Attributes["href"].Value;
-                        links.Add(html2);
+                        links.Add(html2.ToString());
                         amount--;
                     }
                 }

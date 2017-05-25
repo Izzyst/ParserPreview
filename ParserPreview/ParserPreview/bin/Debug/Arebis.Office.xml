@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Arebis.Office</name>
+    </assembly>
+    <members>
+        <member name="T:Arebis.Office.Excel.CellReference">
+            <summary>
+            An immutable spreadsheet cell reference representation.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.#ctor(System.String)">
+            <summary>
+            Creates cell reference.
+            </summary>
+            <param name="reference">Cell reference in A1 format.</param>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates cell reference.
+            </summary>
+            <param name="row">Row number starting at 1.</param>
+            <param name="column">Column number starting at 1.</param>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.Add(System.Int32,System.Int32)">
+            <summary>
+            Returns a new CellReference relative to the current one.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.SetRow(System.Int32)">
+            <summary>
+            Returns a new CellReference on the given row and the same column.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.SetColumn(System.Int32)">
+            <summary>
+            Returns a new CellReference on the same row and the given column.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.ToString">
+            <summary>
+            Return the cell reference in A1 format.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.Equals(System.Object)">
+            <summary>
+            Whether both cell references point to the same cell.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.GetHashCode">
+            <summary>
+            A hash code for this cell reference.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.op_Implicit(System.String)~Arebis.Office.Excel.CellReference">
+            <summary>
+            Converts a string in A1 or R1C1 format to a CellReference.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.op_Implicit(Arebis.Office.Excel.CellReference)~System.String">
+            <summary>
+            Converts a CellReference to a string.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.CellReference.ColumnNameToColumn(System.String)">
+            <summary>
+            Private static helper method to convert column names to numbers.
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.CellReference.Row">
+            <summary>
+            The row number.
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.CellReference.Column">
+            <summary>
+            The column number.
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.CellReference.ColumnName">
+            <summary>
+            The column name (A, B, C, ... AA, AB, etc).
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.CellReference.AsA1">
+            <summary>
+            This cell reference in A1 format.
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.CellReference.AsR1C1">
+            <summary>
+            This cell reference in R1C1 format.
+            </summary>
+        </member>
+        <member name="T:Arebis.Office.Excel.WorkbookMaker">
+            <summary>
+            Tool class to easily create Excel workbooks.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.WorkbookMaker.#ctor">
+            <summary>
+            Creates a new WorkbookMaker for a new, initially blank workbook.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.WorkbookMaker.#ctor(System.String)">
+            <summary>
+            Creates a new WorkbookMaker for a workbook based on the given template file.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.WorkbookMaker.Dispose">
+            <summary>
+            Disposes the workbook maker.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.WorkbookMaker.Select(System.String,System.String)">
+            <summary>
+            Selects the given sheet and cell.
+            If no sheet with the given name is found, one is created.
+            </summary>
+        </member>
+        <member name="M:Arebis.Office.Excel.WorkbookMaker.Write(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{System.Object}},System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Writes data to the currently selected sheet starting at the
+            currently selected cell.
+            </summary>
+            <param name="data">The data as an enumeration of rows wher each row is an enumeration of values.</param>
+            <param name="translateFormulas">Whether to consider string values starting with "=" as A1 formula's and string values starting with "/=" as R1C1 formulas.</param>
+            <param name="headerRows">Number of rows to style as headers. Does only work for new documents.</param>
+            <param name="headerColumns">Number of columns to style as headers. Does only work for new documents.</param>
+        </member>
+        <member name="P:Arebis.Office.Excel.WorkbookMaker.IsNewDocument">
+            <summary>
+            Whether a new document (not based on a template) is being created.
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.WorkbookMaker.Package">
+            <summary>
+            Office OpenXML Package object.
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.WorkbookMaker.CurrentSheet">
+            <summary>
+            The currently selected sheet.
+            </summary>
+        </member>
+        <member name="P:Arebis.Office.Excel.WorkbookMaker.Selection">
+            <summary>
+            The currently selected cell.
+            </summary>
+        </member>
+    </members>
+</doc>

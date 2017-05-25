@@ -12,8 +12,9 @@ namespace ParserPreview
         {
             // FromWebpageFactory fac = new FromWebpageFactory();
             // fac.getLetters();
-            LoadPage collins = new LoadPage();
-            
+            // LoadPage collins = new LoadPage();
+            FromFileFactory ob = new FromFileFactory();
+            ob.FromExcel();
             Console.ReadKey();
         }
     }

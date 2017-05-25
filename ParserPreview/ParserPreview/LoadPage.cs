@@ -13,13 +13,7 @@ using HtmlAgilityPack;
 
 
 //TO DO:
-// pobieranie danych od content definitions do copyrights
-// wyłapać i wyrzucić wszystkie komentarze które może zawierać przeszukiwana strona
-// załadować dane z javascriptu
-// po załadowaniu usunąć z tych danych wszystkie fragmenty zawierające <html  itp.
 // wrzucić dane do json
-
-
 
 namespace ParserPreview
 {
@@ -35,16 +29,16 @@ namespace ParserPreview
             FromWebpageFactory urlList = new FromWebpageFactory();
             links = urlList.getLetters();
 
-            dynamic ob = new ExpandoObject();
-            ob.name = "Colins";
-            //ob.website = "https://www.collinsdictionary.com/dictionary/english/picturesque";
-            ob.language = "en-US";
-            string html = "https://www.collinsdictionary.com/dictionary/english/picturesque";
+            //links.ForEach(i => Console.WriteLine("{0} - {1}\t",  i));
+            //dynamic ob = new ExpandoObject();
+            //ob.name = "Colins";
+            // ob.language = "en-US";
             //ob.defs = gettingNodesfromURL(html);
-            foreach(var item in links)
+  
+
+            foreach (var item in links)
             {
-                Console.WriteLine(item);
-                //words.Add(gettingNodesfromURL(item));
+                words.Add(gettingNodesfromURL(item));
             }
 
             // string json = JsonConvert.SerializeObject(ob);
@@ -55,7 +49,13 @@ namespace ParserPreview
             {
                 words.ForEach(i => file.WriteLine("{0}, {1}\t",i.word, i.defs[0]));
             }*/
-            words.ForEach(i => Console.WriteLine("{0}, {1}\t", i.word, i.defs[0]));
+            foreach (var item in words)
+            {
+                if(item !=null)
+                {
+                    Console.WriteLine("{0}, {1}\t", item.word, item.defs[0]);
+                }
+            }
         }
 
 
@@ -79,17 +79,20 @@ namespace ParserPreview
                         definitions.Add(Strip(link.InnerText));
                     }
                      w = new Words(node.InnerText, definitions);
-                    
+                    return w;
                 }
                 else
                 {
+                   // return null;
                     throw new Exception("No matching nodes found!");
+                    
                 }
-                return w;
+                
             }
             catch(Exception ex)
             {
-                throw;
+              //  throw;
+                return null;
             }
             
         }
