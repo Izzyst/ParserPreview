@@ -25,8 +25,8 @@ namespace ParserPreview
             HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//ul[@class='browse-letters']/li/a");
             string html = "";
             int count = 0;
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\WriteLines2.txt"))
-            {        
+          //  using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\WriteLines2.txt"))
+          //  {        
                 foreach (HtmlNode item in nodes)
                 {
                     html = "https://www.collinsdictionary.com" + item.Attributes["href"].Value;// letterz A-Z
@@ -34,11 +34,19 @@ namespace ParserPreview
                     List<string> w = new List<string>();
                     if(count!=0)// ponieważ słowa w przedziale # nie posiadają podprzedzialów, dlatego je omijam
                     {
-                        for (int i = 0; i < subwords.Count; i++)
+                        Parallel.ForEach(subwords, (sub) => 
+                        {
+                            w = getWords(sub, 1);
+                            lock (words)
+                            { 
+                                words.AddRange(w);// AddRange - dopisuje liste do listy
+                            }
+                        });
+                         /*   for (int i = 0; i < subwords.Count; i++)
                         {
                              w=getWords(subwords[i], 1);
                              words.AddRange(w);// AddRange - dopisuje liste do listy
-                        }
+                        }*/
                     }
                     else
                     {
@@ -48,8 +56,8 @@ namespace ParserPreview
                     count++;  
                 }
                 
-                words.ForEach(i => file.WriteLine("{0}\t", i));
-            }
+               // words.ForEach(i => file.WriteLine("{0}\t", i));
+           // }
             return words;
         }
         // wyciaganie dla każdej poszczegolnej literki( A-Z ) słówek

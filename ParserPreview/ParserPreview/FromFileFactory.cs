@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,36 +9,78 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace ParserPreview
 {
+
+    //TO DO:
+ 
     class FromFileFactory
     {
+        private List<Words> words = new List<Words>();
         // public abstract abstractWords CreateWords();
         // public abstract abstractDefinitions CreateDefinitions();
         public void FromExcel()
         {
-            //Create COM Objects. Create a COM object for everything that is referenced
             Excel.Application xlApp = new Excel.Application();
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@"C:\Users\Izabela\Documents\words.xlsx"); 
             Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
             Excel.Range xlRange = xlWorksheet.UsedRange;
+            Excel.Worksheet x = xlApp.ActiveSheet as Excel.Worksheet;
+ 
+            int rowCount = xlWorksheet.UsedRange.Rows.Count;
+            int colCount = xlWorksheet.UsedRange.Columns.Count;
 
-
-            //iterate over the rows and columns and print to the console as it appears in the file
-            //excel is not zero based!!
-            int rowCount = 10;
-            int colCount = 2;
-            for (int i = 1; i <= rowCount; i++)
+            string lol = "";
+            // Console.WriteLine("ilosc wierszy: " + rowCount + " ilość kolumn: " + colCount);
+            List<string> def = new List<string>();
+            List<string> word2 = new List<string>();
+            for(int i=1; i<=rowCount; i++)
             {
-                for (int j = 1; j <= colCount; j++)
+                string w="";
+                if (x.Cells[i, 1].Value2 != null)
                 {
-                    //new line
-                    if (j == 1)
-                        Console.Write("\r\n");
+                    Console.WriteLine(x.Cells[i, 1].Value2);
+                     w= x.Cells[i, 1].Value2;
+                }
+                    
+                for (int j = 2; j <= colCount; j++)
+                {
+                    if (x.Cells[i, j].Value2 != null)
+                    {
+                        def.Add(x.Cells[i, j].Value2);
+                        Console.WriteLine(x.Cells[i, j].Value2);
+                    }
+                    
+                }
+                words.Add(new Words(w, def));
+                def.Clear();
 
-                    //write the value to the console
-                    if (xlRange.Cells[i, j] != null && xlRange.Cells[i, j].Value2 != null)
-                        Console.Write(xlRange.Cells[i, j].Value2.ToString() + "\t");
+            }
+           
+         //   words.ForEach(i => i.ToString());
+            
+        }
 
-                    //add useful things here!   
+        public void FromCSV()
+        {
+            using (var fs = File.OpenRead(@"C:\Users\Izabela\Documents\words.csv"))
+            using (var reader = new StreamReader(fs))
+            {
+                string word = "";
+                List<string> defs = new List<string>();
+                
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var cols = line.Split(',').Count();
+                    var values = line.Split(',');
+                    //word
+                    word = values[0];
+                    //definition
+                    for (int i=1; i<=cols-1; i++)
+                    {
+                        defs.Add(values[i]);
+                    }
+                    words.Add(new Words(word, defs));
+                    defs.Clear();
                 }
             }
         }

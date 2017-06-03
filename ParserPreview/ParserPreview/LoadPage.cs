@@ -17,7 +17,6 @@ using HtmlAgilityPack;
 
 namespace ParserPreview
 {
-
     class LoadPage
     {
         private List<Words> words = new List<Words>();
@@ -29,27 +28,26 @@ namespace ParserPreview
             FromWebpageFactory urlList = new FromWebpageFactory();
             links = urlList.getLetters();
 
-            //links.ForEach(i => Console.WriteLine("{0} - {1}\t",  i));
-            //dynamic ob = new ExpandoObject();
-            //ob.name = "Colins";
-            // ob.language = "en-US";
-            //ob.defs = gettingNodesfromURL(html);
-  
+            Parallel.ForEach(links, item =>
+            {
+                var temp = gettingNodesfromURL(item);
+                lock (words)//lock blokuje zasoby kolekci które są obecj=nie używane przez jeden z wątków
+                {
 
+                    words.Add(temp);
+                }
+            });
             foreach (var item in links)
             {
                 words.Add(gettingNodesfromURL(item));
             }
 
-            // string json = JsonConvert.SerializeObject(ob);
-            // Console.WriteLine(json);
-            // Console.WriteLine(gettingNodesfromURL());
-            // gettingNodesfromURL(html);
             /*using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\WriteLines1.txt"))
             {
                 words.ForEach(i => file.WriteLine("{0}, {1}\t",i.word, i.defs[0]));
             }*/
-            foreach (var item in words)
+
+           foreach (var item in words)
             {
                 if(item !=null)
                 {
@@ -60,8 +58,7 @@ namespace ParserPreview
 
 
         public Words gettingNodesfromURL(string html)
-        {
-            
+        {         
             List<string> definitions = new List<string>();
             var webGet = new HtmlWeb();
             var doc = webGet.Load(html);
@@ -84,8 +81,7 @@ namespace ParserPreview
                 else
                 {
                    // return null;
-                    throw new Exception("No matching nodes found!");
-                    
+                    throw new Exception("No matching nodes found!");                    
                 }
                 
             }
@@ -93,10 +89,8 @@ namespace ParserPreview
             {
               //  throw;
                 return null;
-            }
-            
+            } 
         }
-
 
         //usuwanie tagów html
         public static string Strip(string text)

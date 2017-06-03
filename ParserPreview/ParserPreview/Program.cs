@@ -10,11 +10,12 @@ namespace ParserPreview
     {
         static void Main(string[] args)
         {
-            // FromWebpageFactory fac = new FromWebpageFactory();
-            // fac.getLetters();
-            // LoadPage collins = new LoadPage();
+            FromWebpageFactory fac = new FromWebpageFactory();
+          //  fac.getLetters();
+          //  LoadPage collins = new LoadPage();
             FromFileFactory ob = new FromFileFactory();
-            ob.FromExcel();
+            //ob.FromExcel();
+            ob.FromCSV();
             Console.ReadKey();
         }
     }

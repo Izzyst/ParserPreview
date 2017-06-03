@@ -19,6 +19,12 @@ namespace ParserPreview
             this.defs = defs;
         }
 
+        public void ToString()
+        {
+            Console.WriteLine(this.word + ": \t");
+            this.defs.ForEach(i => Console.WriteLine("{0}\t", i));
+        }
+
        // public List<>
     }
 }
