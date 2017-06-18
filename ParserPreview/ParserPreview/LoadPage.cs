@@ -24,41 +24,55 @@ namespace ParserPreview
         public LoadPage()
         {
             // pobranie listy zawierającej wyprodukowane adresy stron ze słowami // FromWebpageFactory
+            Console.WriteLine("Pobieram słowa i ich definicje: ...");
             List<string> links = new List<string>();
             FromWebpageFactory urlList = new FromWebpageFactory();
-            links = urlList.getLetters();
+            string dict= "PL";
+
+            if(dict == "ang") {links = urlList.getLetters(); }
+            else{ links = urlList.getLettersPL(); }
+
 
             Parallel.ForEach(links, item =>
-            {
-                var temp = gettingNodesfromURL(item);
-                lock (words)//lock blokuje zasoby kolekci które są obecj=nie używane przez jeden z wątków
-                {
+             {
 
-                    words.Add(temp);
-                }
-            });
-            foreach (var item in links)
-            {
-                words.Add(gettingNodesfromURL(item));
-            }
+                 if (dict == "ang")
+                 {
+                     var temp = gettingNodesfromURL(item);
+                     lock (words)//lock blokuje zasoby kolekci które są obecnie używane przez jeden z wątków
+                    {
+                         words.Add(temp);
+                     }
+                 }
+                 else
+                 {
+                     var temp = gettingNodesFromURLPL(item);
+                     if(temp !=null)
+                     {
+                         lock (words)
+                         {
+                             words.AddRange(temp);// w tym przypadku dopisuje całą listę
+                         }
+                     }
 
-            /*using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\Users\Public\WriteLines1.txt"))
-            {
-                words.ForEach(i => file.WriteLine("{0}, {1}\t",i.word, i.defs[0]));
-            }*/
+                 }
 
-           foreach (var item in words)
+             });
+
+
+          foreach (var item in words)
             {
                 if(item !=null)
                 {
                     Console.WriteLine("{0}, {1}\t", item.word, item.defs[0]);
                 }
             }
+        
         }
 
 
         public Words gettingNodesfromURL(string html)
-        {         
+        {
             List<string> definitions = new List<string>();
             var webGet = new HtmlWeb();
             var doc = webGet.Load(html);
@@ -91,6 +105,58 @@ namespace ParserPreview
                 return null;
             } 
         }
+        // w przypadku słownika kopalinskiego należ pobrac kilka słów i kilka definicji z jednej strony
+        private List<Words> gettingNodesFromURLPL(string html)
+        {
+            List<string> definitions = new List<string>();
+            List<string> defs = new List<string>();
+            var webGet = new HtmlWeb();
+            var doc = webGet.Load(html);
+            List<Words> w = new List<Words>();
+            // word:
+            try
+            {               
+                HtmlNodeCollection node = doc.DocumentNode.SelectNodes("//td/b/font[@class='10ptGeorgia']");// słowa
+                // definitions for word
+                HtmlNodeCollection nodes = doc.DocumentNode.SelectNodes("//td/font[@class='10ptGeorgia']");// definicje dla danego słowa
+                if (nodes != null && node != null)
+                {
+                    for(int i=0; i<node.Count; i++)
+                    {
+                        if(node[i]!=null)
+                        {
+                            if(nodes[i] != null )
+                            {
+                                if(nodes[i].InnerText.Length>10)
+                                {
+                                    List<String> d = new List<String>();
+                                    
+
+                                    defs.Add(Strip(node[i].InnerText));
+                                    definitions.Add(Strip(nodes[i].InnerText));
+                                    d.Add(definitions.Last());
+                                    //Console.WriteLine(defs.Last() + " - " + definitions.Last());
+                                    Words n = new Words(defs.Last(), d);
+                                    w.Add(n);
+                                }                              
+                            }
+                        }                      
+                    }
+                    return w;
+                }
+                else
+                {
+                    // return null;
+                    throw new Exception("No matching nodes found!");
+                }
+            }
+            catch (Exception ex)
+            {
+                //  throw;
+                return null;
+            }
+        }
+  
 
         //usuwanie tagów html
         public static string Strip(string text)

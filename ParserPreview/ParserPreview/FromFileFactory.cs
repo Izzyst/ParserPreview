@@ -79,8 +79,18 @@ namespace ParserPreview
                     {
                         defs.Add(values[i]);
                     }
+                   // defs.ForEach(i => Console.WriteLine("{0}\t", i));
+                  
                     words.Add(new Words(word, defs));
                     defs.Clear();
+                }
+            }
+            foreach (var item in words)
+            {
+                if (item != null)
+                {
+                   Console.WriteLine("{0}\t", item.word);
+                    //Console.WriteLine("{0}\t", item.defs[0]);
                 }
             }
         }

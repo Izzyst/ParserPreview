@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Arebis.Office, Version=1.1.0.0, Culture=neutral, PublicKeyToken=590927a5f9a1c11d, processorArchitecture=MSIL">
       <HintPath>..\packages\Arebis.Office.1.1.0.0\lib\net45\Arebis.Office.dll</HintPath>

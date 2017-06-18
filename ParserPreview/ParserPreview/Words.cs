@@ -16,7 +16,9 @@ namespace ParserPreview
         public Words(string word, List<string>defs)
         {
             this.word = word;
+            Console.WriteLine(this.word);
             this.defs = defs;
+            this.defs.ForEach(i => Console.WriteLine(i));
         }
 
         public void ToString()
